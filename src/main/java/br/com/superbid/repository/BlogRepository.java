@@ -1,0 +1,19 @@
+package br.com.superbid.repository;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import br.com.superbid.model.Blog;
+
+@Repository
+public interface BlogRepository extends JpaRepository<Blog, Long>, JpaSpecificationExecutor<Blog>{
+
+	@Query("select b from blog b")
+	Page<Blog> findAll(Pageable pageable);
+
+	void deleteById(Long id);
+}
